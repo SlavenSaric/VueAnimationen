@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <!-- <div class="container">
     <list-data></list-data>
   </div>
   <div class="container">
@@ -35,13 +35,20 @@
   </base-modal>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
-  </div>
+  </div> -->
+  <router-view v-slot="slotProps">
+      <Transition name="route" mode="out-in">
+        <component :is="slotProps.Component"></component>
+      </Transition>
+    </router-view>
 </template>
 
 <script>
-import ListData from './components/ListData.vue';
+// import { Transition } from 'vue';
+
+// import ListData from './components/ListData.vue';
 export default {
-  components: { ListData },
+  // components: { ListData },
   data() {
     return {
       dialogIsVisible: false,
@@ -206,6 +213,16 @@ button:active {
 
 .fade-button-enter-to .fade-button-leave-from {
   opacity: 1;
+}
+
+.route-enter-from {}
+.route-enter-active {
+  animation: slide-fade 0.4s ease-out;
+}
+.route-enter-to {}
+
+.route-leave-active {
+
 }
 
 @keyframes slide-fade {
